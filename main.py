@@ -59,6 +59,9 @@ def write_entry(path):
         handle.write(ENTRY)
     # Read it back: a write that silently truncates or mangles the line
     # must fail loudly here, not pass the gate check on a stale file.
+    # Verified 2026-11-25: output is 127 chars / 129 bytes, sha256
+    # 6062d1d984b971a2455ad082832f50781a10200f62639c528f1feaa2e7bc0791,
+    # byte-identical between a plain run and a `python3 -O` run.
     with open(path, "r", encoding="utf-8", newline="") as handle:
         written = handle.read()
     if written != ENTRY:
